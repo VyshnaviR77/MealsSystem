@@ -5,7 +5,7 @@ import { HttpClient } from '@angular/common/http';
   providedIn: 'root'
 })
 export class ApiService {
-    server_url = 'https://messsystem.onrender.com';
+    server_url = 'https://mealssystem.onrender.com';
     // http://localhost:9000
 
 
