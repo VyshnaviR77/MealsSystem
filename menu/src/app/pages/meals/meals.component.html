@@ -1,0 +1,188 @@
+<div class="container-fluid">
+
+    <h2 class="mb-4 text-center">Meal Management</h2>
+
+    <div class="card shadow border-0">
+
+        <div class="card-header bg-success text-white">
+            <h5 class="mb-0">Record Daily Meals</h5>
+        </div>
+
+        <div class="card-body">
+
+            <div class="row">
+
+                <div class="col-md-6 mb-3">
+                    <label class="form-label fw-semibold">
+                        Resident
+                    </label>
+
+                    <select
+                        class="form-select"
+                        [(ngModel)]="mealData.userId"
+                        name="userId">
+
+                        <option value="">Select Resident</option>
+
+                        @for(user of users; track user._id){
+
+                        <option [value]="user._id">
+                            {{ user.name }}
+                        </option>
+
+                        }
+
+                    </select>
+                </div>
+
+                <div class="col-md-6 mb-3">
+                    <label class="form-label fw-semibold">
+                        Date
+                    </label>
+
+                    <input
+                        [(ngModel)]="mealData.date"
+                        type="date"
+                        class="form-control">
+                </div>
+
+            </div>
+
+            <div class="row">
+
+                <div class="col-md-4 mb-3">
+
+                    <label class="form-label fw-semibold">
+                        Breakfast
+                    </label>
+
+                    <input
+                        type="number"
+                        class="form-control"
+                        placeholder="Breakfast Meals"
+                        [(ngModel)]="mealData.breakfast">
+
+                </div>
+
+                <div class="col-md-4 mb-3">
+
+                    <label class="form-label fw-semibold">
+                        Lunch
+                    </label>
+
+                    <input
+                        type="number"
+                        class="form-control"
+                        placeholder="Lunch Meals"
+                        [(ngModel)]="mealData.lunch">
+
+                </div>
+
+                <div class="col-md-4 mb-3">
+
+                    <label class="form-label fw-semibold">
+                        Dinner
+                    </label>
+
+                    <input
+                        type="number"
+                        class="form-control"
+                        placeholder="Dinner Meals"
+                        [(ngModel)]="mealData.dinner">
+
+                </div>
+
+            </div>
+
+            <div class="text-end">
+
+                <button
+                    (click)="saveMeal()"
+                    class="btn btn-primary px-4">
+
+                    Save Meal
+
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <div class="card shadow border-0 mt-4">
+
+        <div class="card-header bg-success text-white">
+            <h5 class="mb-0">Monthly Meal Calculation</h5>
+        </div>
+
+        <div class="card-body">
+
+            <div class="row align-items-end">
+
+                <div class="col-md-4 mb-3">
+
+                    <label class="form-label fw-semibold">
+                        Month
+                    </label>
+
+                    <input
+                        type="number"
+                        class="form-control"
+                        placeholder="Enter Month"
+                        [(ngModel)]="selectedMonth">
+
+                </div>
+
+                <div class="col-md-4 mb-3">
+
+                    <label class="form-label fw-semibold">
+                        Year
+                    </label>
+
+                    <input
+                        type="number"
+                        class="form-control"
+                        placeholder="Enter Year"
+                        [(ngModel)]="selectedYear">
+
+                </div>
+
+                <div class="col-md-4 mb-3">
+
+                    <button
+                        class="btn btn-success w-100"
+                        (click)="getMonthlyMeals()">
+
+                        Calculate Meals
+
+                    </button>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+   
+
+    <div class="card shadow border-0 mt-4">
+
+        <div class="card-body text-center">
+
+            <h6 class="text-muted">
+                Total Meals Consumed
+            </h6>
+
+            <h2 class="text-primary fw-bold">
+                {{ totalMeals }}
+            </h2>
+
+        </div>
+
+    </div>
+
+</div>

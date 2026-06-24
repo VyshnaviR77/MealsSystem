@@ -1,0 +1,101 @@
+<div class="container-fluid">
+
+    <h2  class="mb-4 text-center">
+        Dashboard
+    </h2>
+
+    <div class="row">
+
+        <div class="col-md-3 mb-3">
+
+            <div class="card shadow border-primary">
+
+                <div class="card-body text-center">
+
+                    <h6>Total Residents</h6>
+
+                    <h2>
+                        {{ totalResidents }}
+                    </h2>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="col-md-3 mb-3">
+
+            <div class="card shadow border-success">
+
+                <div class="card-body text-center">
+
+                    <h6>Total Meals</h6>
+
+                    <h2>
+                        {{ totalMeals }}
+                    </h2>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="col-md-3 mb-3">
+
+            <div class="card shadow border-warning">
+
+                <div class="card-body text-center">
+
+                    <h6>Total Expense</h6>
+
+                    <h2>
+                        ₹ {{ totalExpense }}
+                    </h2>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="col-md-3 mb-3">
+
+            <div class="card shadow border-danger">
+
+                <div class="card-body text-center">
+
+                    <h6>Cost Per Meal</h6>
+
+                    <h2>
+                        ₹ {{ costPerMeal }}
+                    </h2>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="card shadow mt-4">
+
+        <div class="card-header">
+            Monthly Statistics
+        </div>
+
+        <div class="card-body">
+
+            <div style="height:400px">
+
+                <canvas id="dashboardChart"></canvas>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>

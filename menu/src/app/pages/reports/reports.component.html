@@ -1,0 +1,158 @@
+<div class="container-fluid">
+
+    <h2 class="mb-4">Monthly Report</h2>
+
+    <div class="card shadow mb-4">
+
+        <div class="card-body">
+
+            <div class="row">
+
+                <div class="col-md-3">
+                    <label>Month</label>
+
+                    <input
+                        type="number"
+                        class="form-control"
+                        [(ngModel)]="month">
+                </div>
+
+                <div class="col-md-3">
+                    <label>Year</label>
+
+                    <input
+                        type="number"
+                        class="form-control"
+                        [(ngModel)]="year">
+                </div>
+
+                <div class="col-md-3 d-flex align-items-end">
+
+                    <button
+                        class="btn btn-primary"
+                        (click)="getReport()">
+
+                        Generate Report
+
+                    </button>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    @if(report){
+
+    <!-- Summary -->
+
+    <div class="row mb-4">
+
+        <div class="col-md-4">
+
+            <div class="card border-primary">
+
+                <div class="card-body">
+
+                    <h6>Total Expense</h6>
+
+                    <h4>
+                        ₹ {{ report.totalExpense }}
+                    </h4>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="col-md-4">
+
+            <div class="card border-success">
+
+                <div class="card-body">
+
+                    <h6>Total Meals</h6>
+
+                    <h4>
+                        {{ report.grandTotalMeals }}
+                    </h4>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="col-md-4">
+
+            <div class="card border-warning">
+
+                <div class="card-body">
+
+                    <h6>Cost Per Meal</h6>
+
+                    <h4>
+                        ₹ {{ report.costPerMeal }}
+                    </h4>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- Resident Meal Breakdown -->
+
+    <div class="card shadow">
+
+        <div class="card-header">
+            Meals Per Resident
+        </div>
+
+        <div class="card-body">
+
+            <table class="table table-bordered">
+
+                <thead class="table-dark">
+
+                    <tr>
+                        <th>Resident</th>
+                        <th>Total Meals</th>
+                    </tr>
+
+                </thead>
+
+                <tbody>
+
+                    @for(item of report.residentReport; track item.resident){
+
+                    <tr>
+
+                        <td>
+                            {{ item.resident }}
+                        </td>
+
+                        <td>
+                            {{ item.totalMeals }}
+                        </td>
+
+                    </tr>
+
+                    }
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
+    }
+
+</div>

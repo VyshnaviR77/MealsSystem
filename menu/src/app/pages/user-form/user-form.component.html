@@ -1,0 +1,76 @@
+<div class="container">
+
+    <div class="card shadow">
+
+        <div class="card-header bg-success text-center text-white">
+            {{ isEdit ? 'Edit Resident' : 'Add Resident' }}
+        </div>
+
+        <div class="card-body">
+
+            <div class="row">
+
+                <div class="col-md-6 mb-3">
+                    <label>Name</label>
+                    <input
+                        [(ngModel)]="userData.name"
+                        type="text"
+                        class="form-control">
+                </div>
+
+                <div class="col-md-6 mb-3">
+                    <label>Email</label>
+
+                    <input
+                        type="email"
+                        class="form-control"
+                        [(ngModel)]="userData.email"
+                        (blur)="emailTouched = true">
+
+                    @if(emailTouched && !isValidEmail()){
+                        <small class="text-danger">
+                            Enter a valid Gmail address
+                        </small>
+                    }
+                </div>
+
+                <div class="col-md-6 mb-3">
+                    <label>Phone</label>
+
+                    <input
+                        type="text"
+                        class="form-control"
+                        [(ngModel)]="userData.phone"
+                        (blur)="phoneTouched = true">
+
+                    @if(phoneTouched && !isValidPhone()){
+                        <small class="text-danger">
+                            Enter a valid 10-digit phone number
+                        </small>
+                    }
+                </div>
+
+                <div class="col-md-6 mb-3">
+                    <label>Room No</label>
+
+                    <input
+                        [(ngModel)]="userData.roomNumber"
+                        type="text"
+                        class="form-control">
+                </div>
+
+            </div>
+
+            <button
+                class="btn btn-success"
+                (click)="saveUser()">
+
+                {{ isEdit ? 'Update Resident' : 'Save Resident' }}
+
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
