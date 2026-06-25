@@ -31,6 +31,8 @@ exports.monthlyReport = async (req, res) => {
         const residentReport = [];
 
         for (const user of users) {
+             console.log("Checking User:", user.name);
+    console.log("User ID:", user._id);
 
             const meals = await Meal.find({
                 userId: user._id,
@@ -39,6 +41,7 @@ exports.monthlyReport = async (req, res) => {
                     $lte: endDate
                 }
             });
+             console.log("Meals Found:", meals);
 
             let totalMeals = 0;
 
@@ -50,6 +53,7 @@ exports.monthlyReport = async (req, res) => {
             });
 
             grandTotalMeals += totalMeals;
+              console.log("Total Meals:", totalMeals);
 
             residentReport.push({
                 resident: user.name,

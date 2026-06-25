@@ -36,7 +36,10 @@ selectedYear = new Date().getFullYear();
 
 getMonthlyMeals() {
 
+  console.log('Selected User:', this.mealData.userId);
+
   if (!this.mealData.userId) {
+    console.log('User ID Empty');
     return;
   }
 
@@ -46,12 +49,8 @@ getMonthlyMeals() {
     this.selectedYear
   ).subscribe({
     next: (res: any) => {
-
+      console.log('API Response:', res);
       this.totalMeals = res.totalMeals;
-
-    },
-    error: (err) => {
-      console.log(err);
     }
   });
 
@@ -75,9 +74,18 @@ getMonthlyMeals() {
       next: (res) => {
 
         alert('Meal Added Successfully');
+         console.log("API Response:", JSON.stringify(res));
 
         console.log(res); 
         this.getMonthlyMeals()
+    //     this.mealData={
+           
+    // date: '',
+    // breakfast: 0,
+    // lunch: 0,
+    // dinner: 0
+
+    //     }
          this.router.navigate(['/meals']);
 
 

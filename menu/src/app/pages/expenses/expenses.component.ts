@@ -13,7 +13,7 @@ import { CommonModule } from '@angular/common';
 export class ExpensesComponent {
 
   expenses: any[] = [];
-
+filteredExpenses: any[] = [];
   expenseData = {
     title: '',
     amount: 0,
@@ -54,6 +54,26 @@ export class ExpensesComponent {
     });
 
   }
+  onMonthYearChange() {
+  this.filterExpenses();
+  this.getSummary();
+}
+
+
+  filterExpenses() {
+
+  this.filteredExpenses = this.expenses.filter((expense: any) => {
+
+    const expenseDate = new Date(expense.date);
+
+    return (
+      expenseDate.getMonth() + 1 == this.month &&
+      expenseDate.getFullYear() == this.year
+    );
+
+  });
+
+}
 
  getExpenses() {
 
@@ -62,6 +82,7 @@ export class ExpensesComponent {
 
         this.expenses = res;
         console.log(this.expenses);
+         this.filterExpenses();
         
 
       },

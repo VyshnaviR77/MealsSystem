@@ -66,7 +66,8 @@
                         type="number"
                         class="form-control"
                         placeholder="Month"
-                        [(ngModel)]="month">
+                        [(ngModel)]="month"
+                         (change)="onMonthYearChange()">
                 </div>
 
                 <div class="col-md-3">
@@ -74,7 +75,8 @@
                         type="number"
                         class="form-control"
                         placeholder="Year"
-                        [(ngModel)]="year">
+                        [(ngModel)]="year"
+                         (change)="onMonthYearChange()">
                 </div>
 
                 <div class="col-md-3">
@@ -122,7 +124,7 @@
 
                 <tbody>
 
-                    @for(expense of expenses; track expense._id){
+                  @for(expense of filteredExpenses; track expense._id){
 
                     <tr>
 
