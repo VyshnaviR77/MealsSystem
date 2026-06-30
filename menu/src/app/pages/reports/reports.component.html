@@ -1,6 +1,8 @@
 <div class="container-fluid">
 
-    <h2 class="mb-4">Monthly Report</h2>
+    <h2 class="mb-4">Reports</h2>
+
+    <!-- Filter -->
 
     <div class="card shadow mb-4">
 
@@ -9,27 +11,57 @@
             <div class="row">
 
                 <div class="col-md-3">
-                    <label>Month</label>
+
+                    <label class="form-label">Report Type</label>
+
+                    <select
+                        class="form-select"
+                        [(ngModel)]="reportType">
+
+                        <option value="monthly">
+                            Monthly
+                        </option>
+
+                        <option value="yearly">
+                            Overall Year
+                        </option>
+
+                    </select>
+
+                </div>
+
+                @if(reportType=='monthly'){
+
+                <div class="col-md-3">
+
+                    <label class="form-label">Month</label>
 
                     <input
                         type="number"
+                        min="1"
+                        max="12"
                         class="form-control"
                         [(ngModel)]="month">
+
                 </div>
 
+                }
+
                 <div class="col-md-3">
-                    <label>Year</label>
+
+                    <label class="form-label">Year</label>
 
                     <input
                         type="number"
                         class="form-control"
                         [(ngModel)]="year">
+
                 </div>
 
                 <div class="col-md-3 d-flex align-items-end">
 
                     <button
-                        class="btn btn-primary"
+                        class="btn btn-primary w-100"
                         (click)="getReport()">
 
                         Generate Report
@@ -52,15 +84,15 @@
 
         <div class="col-md-4">
 
-            <div class="card border-primary">
+            <div class="card border-primary shadow-sm">
 
-                <div class="card-body">
+                <div class="card-body text-center">
 
                     <h6>Total Expense</h6>
 
-                    <h4>
-                        ₹ {{ report.totalExpense }}
-                    </h4>
+                    <h3>
+                        ₹ {{ report.totalExpense | number:'1.2-2' }}
+                    </h3>
 
                 </div>
 
@@ -70,15 +102,15 @@
 
         <div class="col-md-4">
 
-            <div class="card border-success">
+            <div class="card border-success shadow-sm">
 
-                <div class="card-body">
+                <div class="card-body text-center">
 
                     <h6>Total Meals</h6>
 
-                    <h4>
+                    <h3>
                         {{ report.grandTotalMeals }}
-                    </h4>
+                    </h3>
 
                 </div>
 
@@ -88,15 +120,15 @@
 
         <div class="col-md-4">
 
-            <div class="card border-warning">
+            <div class="card border-warning shadow-sm">
 
-                <div class="card-body">
+                <div class="card-body text-center">
 
                     <h6>Cost Per Meal</h6>
 
-                    <h4>
-                        ₹ {{ report.costPerMeal }}
-                    </h4>
+                    <h3>
+                        ₹ {{ report.costPerMeal | number:'1.2-2' }}
+                    </h3>
 
                 </div>
 
@@ -106,53 +138,96 @@
 
     </div>
 
-    <!-- Resident Meal Breakdown -->
+    <!-- Resident Report -->
 
     <div class="card shadow">
 
-        <div class="card-header">
-            Meals Per Resident
+        <div class="card-header bg-dark text-white">
+
+            Resident Report
+
         </div>
 
         <div class="card-body">
 
-            <table class="table table-bordered">
+            <div class="table-responsive">
 
-                <thead class="table-dark">
+                <table class="table table-bordered table-hover">
 
-                    <tr>
-                        <th>Resident</th>
-                        <th>Total Meals</th>
-                    </tr>
+                    <thead class="table-dark">
 
-                </thead>
+                        <tr>
 
-                <tbody>
+                            <th>Resident</th>
 
-                    @for(item of report.residentReport; track item.resident){
+                            <th>Total Meals</th>
 
-                    <tr>
+                            <th>Amount To Pay</th>
 
-                        <td>
-                            {{ item.resident }}
-                        </td>
+                            <th>Paid Amount</th>
 
-                        <td>
-                            {{ item.totalMeals }}
-                        </td>
+                            <th>Balance</th>
 
-                    </tr>
+                        </tr>
 
-                    }
+                    </thead>
 
-                </tbody>
+                    <tbody>
 
-            </table>
+                        @for(item of report.residentReport; track item.resident){
+
+                        <tr>
+
+                            <td>
+
+                                {{ item.resident }}
+
+                            </td>
+
+                            <td>
+
+                                {{ item.totalMeals }}
+
+                            </td>
+
+                            <td>
+
+                                ₹ {{ item.amountToPay | number:'1.2-2' }}
+
+                            </td>
+
+                            <td>
+
+                                ₹ {{ item.paidAmount | number:'1.2-2' }}
+
+                            </td>
+
+                            <td>
+
+                                <span
+                                    class="fw-bold"
+                                    [class.text-danger]="item.balance > 0"
+                                    [class.text-success]="item.balance <= 0">
+
+                                    ₹ {{ item.balance | number:'1.2-2' }}
+
+                                </span>
+
+                            </td>
+
+                        </tr>
+
+                        }
+
+                    </tbody>
+
+                </table>
+
+            </div>
 
         </div>
 
     </div>
 
     }
-
 </div>

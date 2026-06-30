@@ -1,0 +1,121 @@
+<div class="container-fluid">
+
+    <h2 class="mb-4">
+        Payment Management
+    </h2>
+
+    <div class="card shadow mb-4">
+
+        <div class="card-header bg-success text-white">
+            Add Payment
+        </div>
+
+        <div class="card-body">
+
+            <div class="row">
+
+                <div class="col-md-4 mb-3">
+
+                    <label>Resident</label>
+
+                    <select
+                        class="form-select"
+                        [(ngModel)]="paymentData.userId">
+
+                        <option value="">
+                            Select Resident
+                        </option>
+
+                        @for(user of users; track user._id){
+
+                        <option [value]="user._id">
+                            {{user.name}}
+                        </option>
+
+                        }
+
+                    </select>
+
+                </div>
+
+                <div class="col-md-4 mb-3">
+
+                    <label>Amount</label>
+
+                    <input
+                        type="number"
+                        class="form-control"
+                        [(ngModel)]="paymentData.amount">
+
+                </div>
+
+                <div class="col-md-4 mb-3">
+
+                    <label>Date</label>
+
+                    <input
+                        type="date"
+                        class="form-control"
+                        [(ngModel)]="paymentData.date">
+
+                </div>
+
+            </div>
+
+            <button
+                class="btn btn-success"
+                (click)="savePayment()">
+
+                Save Payment
+
+            </button>
+
+        </div>
+
+    </div>
+
+    <div class="card shadow">
+
+        <div class="card-header bg-primary text-white">
+            Payment History
+        </div>
+
+        <div class="card-body">
+
+            <table class="table table-bordered">
+
+                <thead class="table-dark">
+
+                    <tr>
+
+                        <th>Resident</th>
+                        <th>Amount</th>
+                        <th>Date</th>
+
+                    </tr>
+
+                </thead>
+
+                <tbody>
+
+                    @for(payment of payments; track payment._id){
+
+                    <tr>
+
+                        <td>{{payment.userId.name}}</td>
+                        <td>₹ {{payment.amount}}</td>
+                        <td>{{payment.date | date:'dd-MM-yyyy'}}</td>
+
+                    </tr>
+
+                    }
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
+</div>

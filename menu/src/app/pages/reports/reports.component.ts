@@ -14,27 +14,44 @@ export class ReportsComponent {
     month = new Date().getMonth() + 1;
   year = new Date().getFullYear();
 
+  reportType = 'monthly';
+
   report: any = null;
 
   constructor(private api:ApiService){}
 
    getReport() {
 
-    this.api.getMonthlyReport(
-      this.month,
-      this.year
-    ).subscribe({
-      next: (res: any) => {
+    if (this.reportType === 'monthly') {
 
-        this.report = res;
-  console.log("REPORT RESPONSE", res);
-        console.log(res);
+      this.api.getMonthlyReport(
+        this.month,
+        this.year
+      ).subscribe({
+        next: (res: any) => {
+          this.report = res;
+        },
+        error: (err) => {
+          console.log(err);
+        }
+      });
 
-      },
-      error: (err) => {
-        console.log(err);
-      }
-    });
+    }
+
+    else {
+
+      this.api.getYearlyReport(
+        this.year
+      ).subscribe({
+        next: (res: any) => {
+          this.report = res;
+        },
+        error: (err) => {
+          console.log(err);
+        }
+      });
+
+    }
 
   }
 

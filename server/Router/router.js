@@ -5,6 +5,7 @@ const userController=require('../Controller/userController')
 const mealController=require('../Controller/mealController')
 const expenseController=require('../Controller/expenseController')
 const reportController=require('../Controller/reportController')
+const paymentController = require("../Controller/paymentController");
 
 router.get("/getuser", userController.getUsers);
 router.post("/adduser", userController.addUser);
@@ -28,8 +29,12 @@ router.get("/summary/:month/:year",expenseController.monthlyExpenseSummary);
 
 
 // report
-router.get("/report/:month/:year",reportController.monthlyReport);
+router.get("/report/year/:year", reportController.yearlyReport);
+router.get("/report/:month/:year", reportController.monthlyReport);
 
+// payment
+router.get("/payment", paymentController.getPayments);
 
+router.post("/addpayment", paymentController.addPayment);
 
 module.exports=router

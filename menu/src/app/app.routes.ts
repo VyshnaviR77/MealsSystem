@@ -6,6 +6,7 @@ import { UserFormComponent } from './pages/user-form/user-form.component';
 import { MealsComponent } from './pages/meals/meals.component';
 import { ExpensesComponent } from './pages/expenses/expenses.component';
 import { ReportsComponent } from './pages/reports/reports.component';
+import { PaymentsComponent } from './pages/payments/payments.component';
 
 export const routes: Routes = [
 
@@ -49,10 +50,15 @@ export const routes: Routes = [
     path: 'reports',
     component: ReportsComponent
   },
+  {
+    path: 'payments',
+    component: PaymentsComponent
+  },
 
   {
     path: '**',
     redirectTo: 'dashboard'
   }
+  
 
 ];

@@ -61,9 +61,24 @@ getUserById(id: string) {
   }
 
   // report
-   getMonthlyReport(month: number, year: number) {
-    return this.http.get(
-      `${this.server_url}/report/${month}/${year}`
-    );
-  }
+   // report
+getMonthlyReport(month: number, year: number) {
+  return this.http.get(
+    `${this.server_url}/report/${month}/${year}`
+  );
+}
+
+getYearlyReport(year: number) {
+  return this.http.get(
+    `${this.server_url}/report/year/${year}`
+  );
+}
+  // payment
+  getPayments() {
+  return this.http.get(`${this.server_url}/payment`);
+}
+
+addPayment(data: any) {
+  return this.http.post(`${this.server_url}/addpayment`, data);
+}
 }
